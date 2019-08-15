@@ -72,9 +72,9 @@ const GatewayList = () => {
               <div className='mv2 nl3 nr3 mh0-l'>
                 <table className={tableClass} style={{ width: '100%' }}>
                   <thead className={tableHeadClass}>
-                      <th className={tableHeadColumnClass} style={{ flexBasis: '80px' }}>Status</th>
-                      <th className={tableHeadColumnClass} style={{ flexBasis: '200px', flexGrow: 1 }}>Gateway</th>
-                      <th className={tableHeadColumnClass} style={{ flexBasis: '120px' }}>Response time</th>
+                    <th className={tableHeadColumnClass} style={{ flexBasis: '80px' }}>Status</th>
+                    <th className={tableHeadColumnClass} style={{ flexBasis: '200px', flexGrow: 1 }}>Gateway</th>
+                    <th className={tableHeadColumnClass} style={{ flexBasis: '120px' }}>Response time</th>
                   </thead>
                   <tbody className={tableBodyClass}>
                     {GATEWAYS.map((gateway, idx) =>
