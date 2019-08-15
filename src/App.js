@@ -5,8 +5,10 @@ import GatewayList from './components/GatewayList'
 
 const App = () =>
   <Fragment>
-    <Header />
-    <GatewayList />
+    <div class='sans-serif'>
+      <Header />
+      <GatewayList />
+    </div>
   </Fragment>
 
 export default App

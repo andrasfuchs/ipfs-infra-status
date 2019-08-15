@@ -33,13 +33,14 @@ const Gateway = ({ gatewayUrl, incrementChecked, incrementOnline }) => {
   }, [])
 
   const gateway = gatewayUrl.split('https://')[1].split('/ipfs/:hash')[0]
-  const dataClass = 'pv2 ph3 bt b--near-white charcoal'
+  const tableBodyRowClass = 'tableRow pointer bb b--near-white f7'
+  const tableBodyRowColumnClass = 'tableRowColumn pv2 navy f6-ns'
 
   return (
-    <tr>
-      <td className={dataClass}><img className='gatewayIcon' src={isOnline === null ? iconSearch : isOnline ? iconOnline : iconError}></img>{isOnline === null ? 'Testing' : isOnline ? 'Online' : 'Offline'}</td>
-      <td className={dataClass}><a className='link blue' href={gatewayUrl} target='_blank'>{gateway}</a></td>
-      <td className={dataClass}>{isOnline ? `${rtt}ms` : '-'}</td>
+    <tr className={tableBodyRowClass}>
+      <td className={tableBodyRowColumnClass} style={{ flexBasis: '80px' }}><img className='gatewayIcon' src={isOnline === null ? iconSearch : isOnline ? iconOnline : iconError}></img>{isOnline === null ? 'Testing' : isOnline ? 'Online' : 'Offline'}</td>
+      <td className={tableBodyRowColumnClass} style={{ flexBasis: '200px', flexGrow: 1 }}><a className='link blue' href={gatewayUrl} target='_blank'>{gateway}</a></td>
+      <td className={tableBodyRowColumnClass} style={{ flexBasis: '120px' }}>{isOnline ? `${rtt}ms` : '-'}</td>
     </tr>
   )
 }
@@ -57,27 +58,39 @@ const GatewayList = () => {
   const incrementChecked = () => setChecked(checked => checked + 1)
   const incrementOnline = () => setOnline(online => online + 1)
 
-  const tableClass = 'w-100 w-80-ns mv4 center collapse sans-serif'
-  const headerClass = 'fw6 tl tracked pv2 ph3'
+  const tableClass = 'tl fw4 LinksTable'
+  const tableHeadClass = 'pointer bb b--near-white f7 tableHeaderRow'
+  const tableHeadColumnClass = 'mid-gray fw2 tracked silver tableHeaderTruncatedText'
+  const tableBodyClass = 'linksTable tableGrid'
 
   return (
-    <div className='h-100 flex flex-column align-center'>
-      <table className={tableClass}>
-        <tbody>
-          <tr>
-            <td className={headerClass}>Status <Badge checked={online} online /></td>
-            <td className={headerClass}>Gateway <Badge checked={checked} total={GATEWAYS.length} /></td>
-            <td className={headerClass}>Response time</td>
-          </tr>
-          { GATEWAYS.map((gateway, idx) =>
-            <Gateway
-              key={`gateway-${idx}`}
-              gatewayUrl={gateway}
-              incrementChecked={incrementChecked}
-              incrementOnline={incrementOnline} />
-          ) }
-        </tbody>
-      </table>
+    <div className='ph4-l pt4-l'>
+      <div className='nt4-l'>
+        <div className='dt-l dt--fixed'>
+          <div className='dtc-l w-100 w-two-thirds-l pr3-l v-top'>
+            <section className='pa4 sans-serif undefined' lng='en-US' style={{ background: '#fbfbfb' }}>
+              <div className='mv2 nl3 nr3 mh0-l'>
+                <table className={tableClass} style={{ width: '100%' }}>
+                  <thead className={tableHeadClass}>
+                      <th className={tableHeadColumnClass} style={{ flexBasis: '80px' }}>Status</th>
+                      <th className={tableHeadColumnClass} style={{ flexBasis: '200px', flexGrow: 1 }}>Gateway</th>
+                      <th className={tableHeadColumnClass} style={{ flexBasis: '120px' }}>Response time</th>
+                  </thead>
+                  <tbody className={tableBodyClass}>
+                    {GATEWAYS.map((gateway, idx) =>
+                      <Gateway
+                        key={`gateway-${idx}`}
+                        gatewayUrl={gateway}
+                        incrementChecked={incrementChecked}
+                        incrementOnline={incrementOnline} />
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
